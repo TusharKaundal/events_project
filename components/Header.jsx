@@ -13,7 +13,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { TfiTicket } from "react-icons/tfi";
 
 const Header = () => {
-  const [session, setSession] = useState(false);
+  const { data: session } = useSession();
 
   return (
     <nav className="drop-shadow-2xl flex items-center justify-between p-3 border-b border-slate-200 border-spacing-0 bg-slate-100 h-24">
@@ -36,7 +36,7 @@ const Header = () => {
       <div className="flex justify-center items-center gap-4">
         <div className="flex items-center justify-center gap-5 font-semibold max-md:hidden">
           <Link
-            href={"#"}
+            href={"/"}
             className="flex items-center justify-center gap-2 hover:text-primary hover:scale-105 hover:underline-offset-8 hover:underline transition-all"
           >
             <div className="scale-110">
@@ -46,7 +46,7 @@ const Header = () => {
           </Link>
 
           <Link
-            href={"#"}
+            href={"/events"}
             className="flex items-center justify-center gap-2 hover:text-primary hover:scale-105 hover:underline-offset-8 hover:underline transition-all"
           >
             <div className="scale-110">
@@ -56,7 +56,7 @@ const Header = () => {
           </Link>
 
           <Link
-            href={"#"}
+            href={"/artists"}
             className="flex items-center justify-center gap-2 hover:text-primary hover:scale-105 hover:underline-offset-8 hover:underline transition-all"
           >
             <div className="scale-110">
@@ -66,7 +66,7 @@ const Header = () => {
           </Link>
 
           <Link
-            href={"#"}
+            href={"/tags"}
             className="flex items-center justify-center gap-2 hover:text-primary hover:scale-105 hover:underline-offset-8 hover:underline transition-all"
           >
             <div className="scale-110">
@@ -76,16 +76,28 @@ const Header = () => {
           </Link>
 
           {session ? (
-            <button
-              onClick={() => {}}
-              className=" bg-gradient-to-r from-orange-400 to-teal-600 text-white px-4 py-2 rounded-md font-medium hover:opacity-70"
-            >
-              Logout
-            </button>
+            <>
+              <Link
+                href={"/create-event"}
+                className="flex items-center justify-center gap-2 hover:text-primary hover:scale-105 hover:underline-offset-8 hover:underline transition-all"
+              >
+                <div className="scale-110">
+                  <TfiTicket />
+                </div>
+                <p>Create Event</p>
+              </Link>
+
+              <button
+                onClick={() => signOut()}
+                className=" bg-gradient-to-r from-orange-400 to-teal-600 text-white px-4 py-2 rounded-md font-medium hover:opacity-70"
+              >
+                Logout
+              </button>
+            </>
           ) : null}
           {!session ? (
             <button
-              onClick={() => {}}
+              onClick={() => signIn()}
               className=" bg-gradient-to-r from-orange-400 to-teal-600 text-white px-4 py-2 rounded-md font-medium hover:opacity-70"
             >
               Log in
